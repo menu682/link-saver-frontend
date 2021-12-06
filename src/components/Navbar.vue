@@ -1,0 +1,71 @@
+<template>
+  <nav class="navbar navbar-expand-lg navbar-style">
+    <div class="container-fluid">
+      <router-link class="navbar-brand" to="/">Link Saver</router-link>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><b>&#9776;</b></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <router-link class="nav-link" aria-current="page" to="/">Главная</router-link>
+          </li>
+        </ul>
+        <form v-if="isAuth === true" class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+          <button class="btn btn-outline-success" type="submit">Поиск</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a v-if="isAuth === true" class="nav-link auth-links" aria-current="page"
+             href="">Выйти</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</template>
+
+<script>
+export default {
+  name: "Navbar",
+  data(){
+    return {
+
+    }
+  },
+  computed:{
+    isAuth(){
+      return this.$store.state.isAuth
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+.navbar-style {
+  background: white;
+  box-shadow: 0px 5px 10px teal;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.nav-link, .navbar-brand, .navbar-toggler {
+  color: teal;
+}
+
+.auth-links {
+  font-size: .9em;
+}
+
+
+
+
+
+</style>
