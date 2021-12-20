@@ -5,6 +5,13 @@
         <h2>Регистрация</h2>
       </div>
       <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Логин</label>
+        <div class="col-sm-10">
+          <input for="staticEmail" type="text" class="form-control" placeholder="login"
+                 v-model="login">
+        </div>
+      </div>
+      <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Email</label>
         <div class="col-sm-10">
           <input for="staticEmail" type="text" class="form-control" placeholder="example@email.ua"
@@ -31,19 +38,52 @@
 
 <script>
 
+import axios from 'axios'
+
 export default {
   name: "Register",
   data(){
     return {
+      login:"",
       email: "",
       password: ""
     }
   },
   methods:{
     register(){
-      //отправить на сервер логин пароль
-      //получить данные от сервера
-      //перенаправить на страницу логина
+      const data = {
+        "username": this.login,
+        "email": this.email,
+        "password": this.password
+      }
+
+      const url = "http://localhost:8080/api/auth/register"
+
+      axios.post(url, data).then(res => {
+
+          this.$notify({
+            type: "success",
+            title: "Регистрация",
+            text: res.data.message,
+          });
+
+        setTimeout(this.goToLogin, 3000)
+
+      }).catch(err => {
+
+        if(err.response){
+          this.$notify({
+            type: "error",
+            title: "Регистрация",
+            text: err.response.data.message
+          });
+        }
+      })
+
+    },
+
+    goToLogin(){
+      this.$router.push({path: '/login'})
     }
   }
 }
@@ -51,9 +91,11 @@ export default {
 
 <style scoped>
 
+
 .form-bloc{
   max-width: 50%;
   padding-top: 100px;
+  color: teal;
 }
 
 .nav-link{

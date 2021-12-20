@@ -24,7 +24,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a v-if="isAuth === true" class="nav-link auth-links" aria-current="page"
-             href="">Выйти</a>
+             href="" @click="logout">Выйти</a>
         </li>
       </ul>
     </div>
@@ -43,11 +43,22 @@ export default {
     isAuth(){
       return this.$store.state.isAuth
     }
+  },
+  methods:{
+    logout(){
+      this.$store.commit('clearAuth')
+      this.$router.push({path: '/login'})
+    }
   }
 }
 </script>
 
 <style scoped>
+
+* {
+  font-family: 'Outfit', sans-serif;
+  color: teal;
+}
 
 .navbar-style {
   background: white;

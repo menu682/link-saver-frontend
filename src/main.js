@@ -1,6 +1,9 @@
 import * as Vue from 'vue'
 import * as Store from 'vuex'
 import * as VueRouter from 'vue-router'
+import * as axios from 'axios'
+import * as VueAxios from 'vue-axios'
+import Notifications from '@kyvg/vue3-notification'
 
 import App from './App.vue'
 import Home from './pages/Home'
@@ -28,12 +31,33 @@ const router = VueRouter.createRouter({
 
 const store = Store.createStore({
     state: {
-        isAuth: true
+        isAuth: false,
+        token: "",
+        userId: 0,
+        username: ""
     },
-    getters: {}
+    mutations: {
+
+        setAuth(state, payload){
+            if(payload.userId > 0){
+                this.state.isAuth = true
+                this.state.token = payload.token
+                this.state.userId = payload.userId
+                this.state.username = payload.username
+            }
+        },
+
+        clearAuth(){
+            this.state.isAuth = false
+            this.state.token = ""
+            this.state.userId = 0
+            this.state.username = ""
+        }
+
+    }
 })
 
 
-Vue.createApp(App).use(router).use(store).mount('#app');
+Vue.createApp(App).use(router).use(store).use(VueAxios, axios).use(Notifications).mount('#app');
 
 
