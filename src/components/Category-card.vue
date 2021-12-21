@@ -1,7 +1,7 @@
 <template>
 
-    <router-link to="/category/:id" class="category-card d-flex align-items-center m-3">
-      <span class="m-auto">{{ title }}</span>
+    <router-link :to="/category/ + cart.id" class="category-card d-flex align-items-center m-3">
+      <span class="m-auto">{{ cart.categoryName }}</span>
     </router-link>
 
 </template>
@@ -9,7 +9,7 @@
 <script>
 export default {
   name: "Category-card",
-  props: ["title"],
+  props: [ "cart" ],
   data() {
     return {
 
@@ -33,6 +33,7 @@ export default {
   border: 1px solid teal;
   border-radius: 10px;
   box-shadow: 0 0 10px teal;
+  color: teal;
   font-weight: 400;
   font-size: 1.4em;
   overflow: hidden;

@@ -8,12 +8,13 @@
     </div>
   </div>
   <div class="row justify-content-center">
-    <CategoryCard v-for="c in categories" :key="c.id" :title="c.title" :id="c.id"/>
+    <CategoryCard v-for="c in categories" :key="c.id" :cart = c />
   </div>
 </template>
 
 <script>
 import CategoryCard from "../components/Category-card";
+import axios from "axios";
 
 export default {
   name: "Category",
@@ -21,23 +22,45 @@ export default {
   data() {
     return {
       message:"",
-      categories: [
-        {id: 1, title: "category 1"},
-        {id: 2, title: "category 2"},
-        {id: 3, title: "category 3"},
-        {id: 4, title: "category 4"},
-        {id: 5, title: "category 5"},
-        {id: 6, title: "category 6"},
-        {id: 7, title: "category 7"},
-        {id: 8, title: "category 8"},
-        {id: 9, title: "category 9"},
-        {id: 10, title: "category 10"},
-        {id: 11, title: "category 11"},
-        {id: 12, title: "category 12"},
-      ],
-      page: 0,
-      limit: 12,
+      categories: [],
     }
+  },
+  created() {
+    this.getAllCategories()
+  },
+  methods:{
+
+    getAllCategories(){
+      const url = "http://localhost:8080/api/category"
+
+      const token = "Bearer " + this.$store.state.token
+
+      axios.get(url,
+          {headers: {
+        "Authorization": token
+      }}).then(res => {
+
+        this.categories = res.data.categories
+
+        this.$notify({
+          type: "success",
+          title: "Категории",
+          text: "Все категории загружены",
+        });
+
+      }).catch(err => {
+
+        if(err.response){
+          this.$notify({
+            type: "error",
+            title: "Ошибка",
+            text: err.response.data.message
+          });
+        }
+      })
+
+    }
+
   }
 }
 </script>
