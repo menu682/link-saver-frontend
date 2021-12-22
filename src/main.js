@@ -4,14 +4,14 @@ import * as VueRouter from 'vue-router'
 import * as axios from 'axios'
 import * as VueAxios from 'vue-axios'
 import Notifications from '@kyvg/vue3-notification'
+import VueSweetalert2 from 'vue-sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
 
 import App from './App.vue'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from "./pages/Register";
 import Category from "./pages/Category";
-import CategoryCreate from "./pages/Category-create";
-import CategoryDelete from "./pages/Category-delete"
 
 
 const router = VueRouter.createRouter({
@@ -22,8 +22,6 @@ const router = VueRouter.createRouter({
         { path: '/register', component: Register },
         { path: '/category', component: Category },
         { path: '/category/{id}', component: Category },
-        { path: '/category-create', component: CategoryCreate },
-        { path: '/category-delete', component: CategoryDelete },
     ],
 })
 
@@ -58,6 +56,12 @@ const store = Store.createStore({
 })
 
 
-Vue.createApp(App).use(router).use(store).use(VueAxios, axios).use(Notifications).mount('#app');
+Vue.createApp(App)
+    .use(router)
+    .use(store)
+    .use(VueAxios, axios)
+    .use(Notifications)
+    .use(VueSweetalert2)
+    .mount('#app');
 
 

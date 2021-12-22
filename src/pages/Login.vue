@@ -55,13 +55,17 @@ export default {
 
         if (res.data.id > 0) {
 
-          const payload = {
-            token: res.data.token,
-            userId: res.data.id,
-            username: res.data.username
-          }
+          localStorage.token = "Bearer " + res.data.token
+          localStorage.userId = res.data.id
+          localStorage.username = res.data.username
 
-          this.$store.commit('setAuth', payload)
+          // const payload = {
+          //   token: res.data.token,
+          //   userId: res.data.id,
+          //   username: res.data.username
+          // }
+
+          //this.$store.commit('setAuth', payload)
 
           this.$notify({
             type: "success",

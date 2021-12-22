@@ -1,14 +1,11 @@
 <template>
   <div class="row m-5">
-    <div class="col-6">
-      <button class="btn-lg btn-outline-success" @click="$router.push('/category-create')">создать категорию</button>
-    </div>
-    <div class="col-6">
-      <button class="btn-lg btn-outline-danger" @click="$router.push('/category-delete')">удалить категорию</button>
+    <div class="col-12">
+      <button class="btn-lg btn-outline-success" @click="createCategory">создать категорию</button>
     </div>
   </div>
   <div class="row justify-content-center">
-    <CategoryCard v-for="c in categories" :key="c.id" :cart = c />
+    <CategoryCard v-for="c in categories" :key="c.id" :cart=c />
   </div>
 </template>
 
@@ -21,24 +18,78 @@ export default {
   components: {CategoryCard},
   data() {
     return {
-      message:"",
+      message: "",
       categories: [],
     }
   },
   created() {
     this.getAllCategories()
   },
-  methods:{
+  methods: {
 
-    getAllCategories(){
+    createCategory() {
+
+      this.$swal(
+          {
+            title: 'Введите название категории',
+            input: 'text',
+            inputAttributes: {
+              autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonColor: 'teal',
+            cancelButtonColor : 'red',
+            confirmButtonText: 'Сохранить',
+            cancelButtonText: 'Отмена',
+            showLoaderOnConfirm: true,
+            preConfirm: (text) => {
+
+              const url = "http://localhost:8080/api/category/"
+              const token = localStorage.token
+              const data = {"categoryName": text}
+
+              axios.post(url, data, {
+                headers: {
+                  "Authorization": token
+                }
+              }).then(res => {
+
+                this.$notify({
+                  type: "success",
+                  title: "Категории",
+                  text: res.data.message,
+                });
+                this.getAllCategories()
+
+              }).catch(err => {
+
+                if (err.response) {
+                  this.$notify({
+                    type: "error",
+                    title: "Ошибка",
+                    text: err.response.data.message
+                  });
+                }
+              })
+            }
+          }
+      )
+
+      },
+
+
+    getAllCategories() {
+
       const url = "http://localhost:8080/api/category"
 
-      const token = "Bearer " + this.$store.state.token
+      const token = localStorage.token
 
       axios.get(url,
-          {headers: {
-        "Authorization": token
-      }}).then(res => {
+          {
+            headers: {
+              "Authorization": token
+            }
+          }).then(res => {
 
         this.categories = res.data.categories
 
@@ -50,7 +101,7 @@ export default {
 
       }).catch(err => {
 
-        if(err.response){
+        if (err.response) {
           this.$notify({
             type: "error",
             title: "Ошибка",
@@ -67,7 +118,7 @@ export default {
 
 <style scoped>
 
-.btn-lg{
+.btn-lg {
   min-width: 100%;
 }
 
