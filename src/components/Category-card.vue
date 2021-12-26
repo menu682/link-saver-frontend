@@ -52,7 +52,7 @@ export default {
             showCancelButton: true,
             confirmButtonColor: 'teal',
             cancelButtonColor : 'red',
-            confirmButtonText: 'Сохранить',
+            confirmButtonText: 'Удалить?',
             cancelButtonText: 'Отмена',
             showLoaderOnConfirm: true,
           }).then((result) => {

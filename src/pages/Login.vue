@@ -12,9 +12,9 @@
       </div>
     </div>
     <div class="mb-3 row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">Пароль</label>
+      <label class="col-sm-2 col-form-label">Пароль</label>
       <div class="col-sm-10">
-        <input type="password" class="form-control" placeholder="password" v-model="password">
+        <input type="password" class="form-control" placeholder="password" v-model="password" @keyup.enter="login">
       </div>
     </div>
     <div class="mb-3 row">
@@ -65,7 +65,7 @@ export default {
           //   username: res.data.username
           // }
 
-          //this.$store.commit('setAuth', payload)
+          this.$store.commit('setAuth')
 
           this.$notify({
             type: "success",

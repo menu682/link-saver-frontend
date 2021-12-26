@@ -10,13 +10,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link class="nav-link" aria-current="page" to="/">Главная</router-link>
+            <router-link v-if="isAuth === false" class="nav-link" aria-current="page" to="/">Главная</router-link>
+            <router-link v-if="isAuth === true" class="nav-link" aria-current="page" to="/category">Главная</router-link>
           </li>
         </ul>
-        <form v-if="isAuth === true" class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
-          <button class="btn btn-outline-success" type="submit">Поиск</button>
-        </form>
       </div>
     </div>
 

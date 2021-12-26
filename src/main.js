@@ -12,6 +12,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from "./pages/Register";
 import Category from "./pages/Category";
+import Link from "./pages/Link";
 
 
 const router = VueRouter.createRouter({
@@ -21,7 +22,7 @@ const router = VueRouter.createRouter({
         { path: '/login', component: Login },
         { path: '/register', component: Register },
         { path: '/category', component: Category },
-        { path: '/category/{id}', component: Category },
+        { path: '/category/:id', component: Link, props: true },
     ],
 })
 
@@ -29,20 +30,12 @@ const router = VueRouter.createRouter({
 
 const store = Store.createStore({
     state: {
-        isAuth: false,
-        token: "",
-        userId: 0,
-        username: ""
+        isAuth: false
     },
     mutations: {
 
-        setAuth(state, payload){
-            if(payload.userId > 0){
+        setAuth(){
                 this.state.isAuth = true
-                this.state.token = payload.token
-                this.state.userId = payload.userId
-                this.state.username = payload.username
-            }
         },
 
         clearAuth(){
