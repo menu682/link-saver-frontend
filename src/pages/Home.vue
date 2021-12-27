@@ -1,5 +1,5 @@
 <template>
-
+<Navbar/>
     <div class="row m-5">
       <h2>Сервис хранения ссылок</h2>
       <p>Для полноценной работы с сервисом нужно <router-link to="/login" class="link-success">войти</router-link> в свою учётную запись</p>
@@ -10,8 +10,10 @@
 
 <script>
 
+import Navbar from "../components/Navbar";
 export default {
   name: "Home",
+  components: {Navbar},
 }
 </script>
 

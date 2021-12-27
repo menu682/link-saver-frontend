@@ -1,5 +1,5 @@
 <template>
-
+<Navbar/>
   <div class="row m-5 add-box" id="add-box" :style="`height: ${height}`">
     <div class="col-12">
       <button class="btn-lg btn-outline-success" @click="showAdd">добавить ссылку</button>
@@ -38,10 +38,11 @@
 <script>
 import axios from "axios";
 import LinkCard from "../components/Link-card";
+import Navbar from "../components/Navbar";
 
 export default {
   name: "Link",
-  components: {LinkCard},
+  components: {Navbar, LinkCard},
   props: [ "id" ],
   data() {
     return {

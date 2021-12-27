@@ -1,5 +1,5 @@
 <template>
-
+<Navbar/>
     <div class="form-bloc m-auto">
       <div>
         <h2>Регистрация</h2>
@@ -39,9 +39,11 @@
 <script>
 
 import axios from 'axios'
+import Navbar from "../components/Navbar";
 
 export default {
   name: "Register",
+  components: {Navbar},
   data(){
     return {
       login:"",

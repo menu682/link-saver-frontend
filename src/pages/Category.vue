@@ -1,4 +1,5 @@
 <template>
+  <Navbar/>
   <div class="row m-5">
     <div class="col-12">
       <button class="btn-lg btn-outline-success" @click="createCategory">создать категорию</button>
@@ -12,10 +13,11 @@
 <script>
 import CategoryCard from "../components/Category-card";
 import axios from "axios";
+import Navbar from "../components/Navbar";
 
 export default {
   name: "Category",
-  components: {CategoryCard},
+  components: {Navbar, CategoryCard},
   data() {
     return {
       message: "",

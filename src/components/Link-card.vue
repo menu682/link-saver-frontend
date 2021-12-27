@@ -197,6 +197,7 @@ export default {
 
 .link-box:hover {
   box-shadow: 0 0 20px teal;
+  cursor: pointer;
 }
 
 a {

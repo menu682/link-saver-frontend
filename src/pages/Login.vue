@@ -1,5 +1,5 @@
 <template>
-
+<Navbar/>
   <div class="form-bloc m-auto">
     <div>
       <h2>Вход</h2>
@@ -32,9 +32,11 @@
 <script>
 
 import axios from 'axios'
+import Navbar from "../components/Navbar";
 
 export default {
   name: "Login",
+  components: {Navbar},
   data() {
     return {
       username: "",
@@ -58,6 +60,7 @@ export default {
           localStorage.token = "Bearer " + res.data.token
           localStorage.userId = res.data.id
           localStorage.username = res.data.username
+          localStorage.isAuth = true
 
           // const payload = {
           //   token: res.data.token,
@@ -65,7 +68,7 @@ export default {
           //   username: res.data.username
           // }
 
-          this.$store.commit('setAuth')
+          //this.$store.commit('setAuth')
 
           this.$notify({
             type: "success",

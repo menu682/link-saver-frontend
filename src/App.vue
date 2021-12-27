@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <notifications position="bottom right" width="400px" classes="notif"/>
-    <Navbar/>
+
     <router-view></router-view>
   </div>
 </template>
@@ -10,11 +10,9 @@
 
 
 import store from "core-js";
-import Navbar from "./components/Navbar";
 
 export default {
   name: 'App',
-  components:{Navbar},
   store
 }
 </script>

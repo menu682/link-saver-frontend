@@ -10,8 +10,8 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link v-if="isAuth === false" class="nav-link" aria-current="page" to="/">Главная</router-link>
             <router-link v-if="isAuth === true" class="nav-link" aria-current="page" to="/category">Главная</router-link>
+            <router-link v-else class="nav-link" aria-current="page" to="/">Главная</router-link>
           </li>
         </ul>
       </div>
@@ -37,13 +37,16 @@ export default {
     }
   },
   computed:{
-    isAuth(){
-      return this.$store.state.isAuth
-    }
+      isAuth(){
+        if(localStorage.isAuth === "true"){
+          return true
+        }
+          return false
+      }
   },
   methods:{
     logout(){
-      this.$store.commit('clearAuth')
+      localStorage.clear()
       this.$router.push({path: '/login'})
     }
   }

@@ -29,23 +29,7 @@ const router = VueRouter.createRouter({
 
 
 const store = Store.createStore({
-    state: {
-        isAuth: false
-    },
-    mutations: {
 
-        setAuth(){
-                this.state.isAuth = true
-        },
-
-        clearAuth(){
-            this.state.isAuth = false
-            this.state.token = ""
-            this.state.userId = 0
-            this.state.username = ""
-        }
-
-    }
 })
 
 
